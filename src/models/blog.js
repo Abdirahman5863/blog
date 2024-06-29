@@ -2,10 +2,10 @@
 import mongoose from "mongoose";
 
 const BlogSchem = mongoose.Schema({
-    title: string,
-    description:string,
+    title: String,
+    description:String,
 })
-const Blog = mongoose.model.Blog || mongoose.model( "Blog", BlogSchem)
+const Blog = mongoose.models.Blog || mongoose.models( "Blog", BlogSchem)
 
 
 

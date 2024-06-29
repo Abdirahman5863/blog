@@ -1,5 +1,5 @@
-import BlogOverview from "../components/blog-overview";
+import BlogOverview from "../../components/blog-overview";
 
-export default async function BlogAdd(){
-return <BlogOverview/>
+export default async function BlogAdd() {
+  return <BlogOverview />;
 }

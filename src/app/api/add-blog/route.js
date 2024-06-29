@@ -3,43 +3,47 @@ import Blog from "@/models/blog";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 
-const addNewBlog = Joi.object({
+const AddNewBlog = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
 });
 
-export default async function POST(req) {
+export async function POST(req) {
   try {
     await connectToDb();
-    const extractAddedBlog = await req.json();
-    const { title, description } = extractAddedBlog;
-    const { error } = addNewBlog.validate({
+
+    const extractBlogData = await req.json();
+    const { title, description } = extractBlogData;
+
+    const { error } = AddNewBlog.validate({
       title,
       description,
     });
+
     if (error) {
       return NextResponse.json({
         success: false,
         message: error.details[0].message,
       });
     }
-    const NewlyAddBlog = await Blog.create(extractAddedBlog);
-    if (NewlyAddBlog) {
+
+    const newlyCreatedBlogItem = await Blog.create(extractBlogData);
+    if (newlyCreatedBlogItem) {
       return NextResponse.json({
         success: true,
-        message: "Blog succussefully created",
+        message: "Blog added successfully",
       });
     } else {
       return NextResponse.json({
         success: false,
-        message: "Failed,try gain later",
+        message: "Something went wrong ! Please try again",
       });
     }
   } catch (error) {
     console.log(error);
     return NextResponse.json({
       success: false,
-      message: "Failed,try again Please",
+      message: "Something went wrong ! Please try again",
     });
   }
 }
