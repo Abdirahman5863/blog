@@ -1,11 +1,10 @@
-
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const BlogSchem = mongoose.Schema({
     title: String,
-    description:String,
+    description: String,
 })
-const Blog = mongoose.models.Blog || mongoose.models( "Blog", BlogSchem)
+const Blog = mongoose.models.Blog || mongoose.model( "Blog", BlogSchem)
 
 
 

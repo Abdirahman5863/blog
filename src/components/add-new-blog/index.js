@@ -17,18 +17,35 @@ export default function AddNewBlog({
   HandleAddBlog,
   formBlogdata,
   setFormBlogdata,
+  currentEditBlog,
+  setCurrentEditBlog
 }) {
   return (
     <>
       <div>
-        <Button variant="outline" onClick={() => setOpenDialog(true)}>
+        <Button variant="outline" onClick={() => setOpenDialog(true)
+          
+        }>
           Add Blog
         </Button>
       </div>
-      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+      <Dialog open={openDialog} onOpenChange={
+
+    () => {
+    setCurrentEditBlog(false)
+        setOpenDialog(false)
+        setFormBlogdata({
+            title: "",
+            description: "",
+
+        })
+        
+        
+    }
+      }>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Add Blog</DialogTitle>
+            <DialogTitle>{ currentEditBlog ?"Edit Blog"  :"Add Blog"}</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
